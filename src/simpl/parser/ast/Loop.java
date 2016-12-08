@@ -38,6 +38,11 @@ public class Loop extends Expr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        BoolValue v1 = (BoolValue)e1.eval(s);
+        while (v1.b) {
+            e2.eval(s);
+            v1 = (BoolValue)e1.eval(s);
+        }
+        return Value.UNIT;
     }
 }

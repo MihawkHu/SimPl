@@ -10,15 +10,19 @@ public class DefaultTypeEnv extends TypeEnv {
         // TODO Done
         TypeVar a = new TypeVar(true);
         TypeVar b = new TypeVar(true);
+        TypeVar c = new TypeVar(true);
+        TypeVar d = new TypeVar(true);
+        TypeVar e = new TypeVar(true);
+        TypeVar f = new TypeVar(true);
 
         E = TypeEnv.of(E, Symbol.symbol("fst"),
                 new ArrowType(new PairType(a, b), a));
         E = TypeEnv.of(E, Symbol.symbol("snd"),
-                new ArrowType(new PairType(a, b), b));
+                new ArrowType(new PairType(c, d), d));
         E = TypeEnv.of(E, Symbol.symbol("hd"),
-                new ArrowType(new ListType(a), a));
+                new ArrowType(new ListType(e), e));
         E = TypeEnv.of(E, Symbol.symbol("tl"),
-                new ArrowType(new ListType(a), new ListType(a)));
+                new ArrowType(new ListType(f), new ListType(f)));
         E = TypeEnv.of(E, Symbol.symbol("iszero"),
                 new ArrowType(Type.INT, Type.BOOL));
         E = TypeEnv.of(E, Symbol.symbol("pred"),

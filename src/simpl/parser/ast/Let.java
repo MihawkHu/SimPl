@@ -30,6 +30,7 @@ public class Let extends Expr {
         // TODO Done
         TypeResult tr1 = e1.typecheck(E);
         E = TypeEnv.of(E, x, tr1.t);
+
         TypeResult tr2 = e2.typecheck(E);
         Substitution sub = tr2.s.compose(tr1.s);
         return TypeResult.of(sub, sub.apply(tr2.t));

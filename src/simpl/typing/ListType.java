@@ -37,7 +37,7 @@ public final class ListType extends Type {
     @Override
     public Type replace(TypeVar a, Type t) {
         // TODO Done
-        return new ListType(t.replace(a, t));
+        return new ListType(this.t.replace(a, t));
     }
 
     public String toString() {

@@ -1,10 +1,6 @@
 package simpl.parser.ast;
 
-import simpl.interpreter.Env;
-import simpl.interpreter.FunValue;
-import simpl.interpreter.RuntimeError;
-import simpl.interpreter.State;
-import simpl.interpreter.Value;
+import simpl.interpreter.*;
 import simpl.parser.Symbol;
 import simpl.typing.ArrowType;
 import simpl.typing.Substitution;
@@ -17,8 +13,10 @@ import simpl.interpreter.lib.fst;
 import simpl.interpreter.lib.hd;
 import simpl.interpreter.lib.snd;
 import simpl.interpreter.lib.tl;
-import simpl.interpreter.PairValue;
-import simpl.interpreter.ConsValue;
+import simpl.interpreter.pcf.iszero;
+import simpl.interpreter.pcf.succ;
+import simpl.interpreter.pcf.pred;
+
 
 public class App extends BinaryExpr {
 
@@ -59,20 +57,33 @@ public class App extends BinaryExpr {
             return ((PairValue)v).v2;
         }
         else if (fun instanceof hd) {
-//            if (v.equals(new NilValue())) {
-//                throw new RuntimeError("Nil can't in function hd");
-//            }
-//            else {
+            if (v instanceof NilValue) {
+                throw new RuntimeError("Nil can't in function hd");
+            }
+            else {
                 return ((ConsValue)v).v1;
-//            }
+            }
         }
         else if (fun instanceof tl) {
-//            if (v instanceof NilValue) {
-//                throw new RuntimeError("Nil can't in function tl");
-//            }
-//            else {
-                return ((ConsValue) v).v2;
-//            }
+            if (v instanceof NilValue) {
+                throw new RuntimeError("Nil can't in function tl");
+            }
+            else {
+                return ((ConsValue)v).v2;
+            }
+        }
+        else if (fun instanceof iszero) {
+            IntValue i1 = new IntValue(0);
+            boolean b1 = ((IntValue)v).equals(i1);
+            return new BoolValue(b1);
+        }
+        else if (fun instanceof succ) {
+            int t1 = ((IntValue)v).n;
+            return new IntValue(t1 + 1);
+        }
+        else if (fun instanceof pred) {
+            int t1 = ((IntValue)v).n;
+            return new IntValue(t1 - 1);
         }
         else {
             Env env1 = new Env(fun.E, fun.x, v);
