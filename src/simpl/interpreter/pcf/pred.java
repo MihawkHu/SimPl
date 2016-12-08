@@ -15,7 +15,14 @@ import simpl.typing.TypeResult;
 public class pred extends FunValue {
 
     public pred() {
-        // TODO
+        // TODO Done
+        // I impletented it in other place
+        // So here it only need to initialize
         super(null, null, null);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof pred);
     }
 }

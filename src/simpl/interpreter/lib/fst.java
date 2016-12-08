@@ -15,7 +15,9 @@ import simpl.typing.TypeResult;
 public class fst extends FunValue {
 
     public fst() {
-        // TODO
+        // TODO Done
+        // I impletented it in other place
+        // So here it only need to initialize
         super(null, null, null);
     }
 

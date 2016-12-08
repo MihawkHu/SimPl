@@ -40,11 +40,11 @@ public class Interpreter {
     }
 
     public static void main(String[] args) {
-//        interpret("doc/examples/plus.spl");
+        interpret("doc/examples/plus.spl");
 //        interpret("doc/examples/factorial.spl");
 //        interpret("doc/examples/gcd1.spl");
 //        interpret("doc/examples/gcd2.spl");
-        interpret("doc/examples/max.spl");
+//        interpret("doc/examples/max.spl");
 //        interpret("doc/examples/sum.spl");
 //        interpret("doc/examples/map.spl");
 //        interpret("doc/examples/pcf.sum.spl");
@@ -54,5 +54,6 @@ public class Interpreter {
 //        interpret("doc/examples/pcf.fibonacci.spl");
 //        interpret("doc/examples/pcf.twice.spl");
 //        interpret("doc/examples/pcf.lists.spl");
+//        interpret("doc/examples/true.spl");
     }
 }
