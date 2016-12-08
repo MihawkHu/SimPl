@@ -11,26 +11,38 @@ public final class PairType extends Type {
 
     @Override
     public boolean isEqualityType() {
-        // TODO
-        return false;
+        // TODO Done
+        return t1.isEqualityType() && t2.isEqualityType();
     }
 
     @Override
     public Substitution unify(Type t) throws TypeError {
-        // TODO
-        return null;
+        // TODO Done
+        if (t instanceof TypeVar) {
+            return t.unify(this);
+        }
+        else if (t instanceof PairType) {
+            Substitution s1 = t1.unify(((PairType)t).t1);
+            Substitution s2 = t2.unify(((PairType)t).t2);
+            return s2.compose(s1);
+        }
+        else {
+            throw new TypeMismatchError();
+        }
     }
 
     @Override
     public boolean contains(TypeVar tv) {
-        // TODO
-        return false;
+        // TODO Done
+        return t1.contains(tv) || t2.contains(tv);
     }
 
     @Override
     public Type replace(TypeVar a, Type t) {
-        // TODO
-        return null;
+        // TODO Done
+        Type t3 = t1.replace(a, t);
+        Type t4 = t2.replace(a, t);
+        return new PairType(t3, t4);
     }
 
     public String toString() {

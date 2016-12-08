@@ -28,7 +28,9 @@ public class AndAlso extends BinaryExpr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        // TODO Done
+        BoolValue v1 = (BoolValue)l.eval(s);
+        BoolValue v2 = (BoolValue)r.eval(s);
+        return new BoolValue(v1.b && v2.b);
     }
 }

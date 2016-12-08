@@ -28,7 +28,8 @@ public class Neg extends UnaryExpr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        // TODO Done
+        IntValue v = (IntValue)e.eval(s);
+        return new IntValue(-v.n);
     }
 }

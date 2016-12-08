@@ -17,7 +17,15 @@ public class RecValue extends Value {
 
     @Override
     public boolean equals(Object other) {
-        // TODO
+        // TODO Done
+        if (other instanceof RecValue) {
+            RecValue temp = (RecValue)other;
+            String r1 = temp.e.toString();
+            String r2 = r1.replaceAll(temp.x.toString(), x.toString());
+            if (e.toString().equals(r2)) {
+               return true;
+            }
+        }
         return false;
     }
 }

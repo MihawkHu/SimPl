@@ -30,7 +30,8 @@ public class Deref extends UnaryExpr {
 
     @Override
     public Value eval(State s) throws RuntimeError {
-        // TODO
-        return null;
+        // TODO Done
+        RefValue r1 = (RefValue)e.eval(s);
+        return s.M.get(r1.p);
     }
 }

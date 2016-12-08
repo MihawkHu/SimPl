@@ -16,7 +16,7 @@ import simpl.typing.TypeResult;
 public class iszero extends FunValue {
 
     public iszero() {
-        // TODO
+        // TODO 
         super(null, null, null);
     }
 }

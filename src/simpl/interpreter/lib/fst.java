@@ -16,6 +16,12 @@ public class fst extends FunValue {
 
     public fst() {
         // TODO
+
         super(null, null, null);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof fst);
     }
 }
