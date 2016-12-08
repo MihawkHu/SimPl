@@ -20,7 +20,7 @@ public abstract class EqExpr extends BinaryExpr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
         TypeResult tr1 = l.typecheck(E);
-        TypeResult tr2 = r.typecheck(tr1.s.compose(E));
+        TypeResult tr2 = r.typecheck(E);
 
         // left and right exp should be equality type
         if (tr1.t.isEqualityType() && tr2.t.isEqualityType()){

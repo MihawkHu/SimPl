@@ -23,8 +23,10 @@ public class Seq extends BinaryExpr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
         TypeResult tr1 = l.typecheck(E);
-        TypeResult tr2 = r.typecheck(tr1.s.compose(E));
+        TypeResult tr2 = r.typecheck(E);
+
         Substitution sub1 = tr1.s.compose(tr2.s);
+
         return TypeResult.of(sub1, sub1.apply(tr2.t));
     }
 

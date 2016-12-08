@@ -32,7 +32,7 @@ public class App extends BinaryExpr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
         TypeResult tr1 = l.typecheck(E);
-        TypeResult tr2 = r.typecheck(tr1.s.compose(E));
+        TypeResult tr2 = r.typecheck(E);
         ArrowType t3 = new ArrowType(new TypeVar(true), new TypeVar(true));
 
         Substitution sub1 = tr2.s.compose(tr1.s);

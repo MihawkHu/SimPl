@@ -26,6 +26,7 @@ public class Deref extends UnaryExpr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
         TypeResult tr1 = e.typecheck(E);
+
         TypeVar tv1 = new TypeVar(true);
         RefType t1 = new RefType(tv1);
 

@@ -25,7 +25,8 @@ public class Pair extends BinaryExpr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
         TypeResult tr1 = l.typecheck(E);
-        TypeResult tr2 = r.typecheck(tr1.s.compose(E));
+        TypeResult tr2 = r.typecheck(E);
+
         Substitution sub1 = tr2.s.compose(tr1.s);
 
         return TypeResult.of(sub1, new PairType(sub1.apply(tr1.t),

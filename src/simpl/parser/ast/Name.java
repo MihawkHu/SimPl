@@ -26,9 +26,9 @@ public class Name extends Expr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
-        if (E.get(x) == null){
-            throw new TypeError("Name not found");
-        }
+//        if (E.get(x) == null){
+//            throw new TypeError("Name not found");
+//        }
         return TypeResult.of(E.get(x));
     }
 

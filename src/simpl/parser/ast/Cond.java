@@ -28,16 +28,17 @@ public class Cond extends Expr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
         TypeResult tr1 = e1.typecheck(E);
-        TypeResult tr2 = e2.typecheck(tr1.s.compose(E));
-        TypeResult tr3 = e3.typecheck(tr2.s.compose(tr1.s.compose((E))));
+        TypeResult tr2 = e2.typecheck(E);
+        TypeResult tr3 = e3.typecheck(E);
 
         Substitution sub1 = tr3.s.compose(tr2.s.compose(tr1.s));
         Substitution sub2 = sub1.apply(tr1.t).unify(Type.BOOL);
         sub1 = sub1.compose(sub2);
         Substitution sub3 = sub1.apply(tr2.t).unify(sub1.apply(tr3.t));
+        sub1 = sub1.compose(sub3);
         Type t1 = sub1.apply(tr3.t);
 
-        return TypeResult.of(sub3, t1);
+        return TypeResult.of(sub1, t1);
     }
 
     @Override

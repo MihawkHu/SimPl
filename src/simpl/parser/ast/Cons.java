@@ -25,7 +25,8 @@ public class Cons extends BinaryExpr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
         TypeResult tr1 = l.typecheck(E);
-        TypeResult tr2 = r.typecheck(tr1.s.compose(E));
+        TypeResult tr2 = r.typecheck(E);
+
         TypeVar tv1 = new TypeVar(true);
         ListType t1 = new ListType(tv1);
 

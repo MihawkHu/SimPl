@@ -20,6 +20,7 @@ public class Nil extends Expr {
         // TODO Done
         TypeVar tv1 = new TypeVar(true);
         ListType t1 = new ListType(tv1);
+
         return TypeResult.of(t1);
     }
 
