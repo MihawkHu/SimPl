@@ -23,7 +23,7 @@ public class TypeVar extends Type {
     public Substitution unify(Type t) throws TypeCircularityError {
         // TODO Done
         if (t instanceof TypeVar) {
-            if (((TypeVar)t).name.equals(name)) {
+            if (((TypeVar)t).name.equals(this.name)) {
                 return Substitution.IDENTITY;
             }
             else {
@@ -34,7 +34,7 @@ public class TypeVar extends Type {
             throw new TypeCircularityError();
         }
         else {
-            Substitution.of(this, t);
+            return Substitution.of(this, t);
         }
     }
 

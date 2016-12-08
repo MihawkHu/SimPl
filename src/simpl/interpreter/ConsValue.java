@@ -24,7 +24,7 @@ public class ConsValue extends Value {
 
     public String toString() {
         // TODO Done
-        String r = String.Valueof(this.length());
+        String r = String.valueOf(this.length());
         return "list@" + r;
 
     }

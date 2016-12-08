@@ -1,6 +1,7 @@
 package simpl.interpreter;
 
 import static simpl.parser.Symbol.symbol;
+import simpl.parser.Symbol;
 import simpl.interpreter.lib.hd;
 import simpl.interpreter.lib.tl;
 import simpl.interpreter.lib.fst;

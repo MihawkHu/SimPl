@@ -8,6 +8,7 @@ import simpl.parser.Symbol;
 import simpl.typing.TypeEnv;
 import simpl.typing.TypeError;
 import simpl.typing.TypeResult;
+import simpl.typing.Substitution;
 
 public class Let extends Expr {
 
@@ -26,8 +27,12 @@ public class Let extends Expr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        // TODO Done
+        TypeResult tr1 = e1.typecheck(E);
+        E = TypeEnv.of(E, x, tr1.t);
+        TypeResult tr2 = e2.typecheck(E);
+        Substitution sub = tr2.s.compose(tr1.s);
+        return TypeResult.of(sub, sub.apply(tr2.t));
     }
 
     @Override

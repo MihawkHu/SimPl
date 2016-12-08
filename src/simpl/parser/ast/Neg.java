@@ -22,8 +22,10 @@ public class Neg extends UnaryExpr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        // TODO Done
+        TypeResult tr1 = e.typecheck(E);
+        Substitution sub1 = tr1.t.unify(Type.INT);
+        return TypeResult.of(sub1, Type.INT);
     }
 
     @Override

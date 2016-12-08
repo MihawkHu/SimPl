@@ -8,6 +8,8 @@ import simpl.typing.PairType;
 import simpl.typing.TypeEnv;
 import simpl.typing.TypeError;
 import simpl.typing.TypeResult;
+import simpl.typing.Substitution;
+
 
 public class Pair extends BinaryExpr {
 
@@ -21,8 +23,13 @@ public class Pair extends BinaryExpr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        // TODO Done
+        TypeResult tr1 = l.typecheck(E);
+        TypeResult tr2 = r.typecheck(tr1.s.compose(E));
+        Substitution sub1 = tr2.s.compose(tr1.s);
+
+        return TypeResult.of(sub1, new PairType(sub1.apply(tr1.t),
+                sub1.apply(tr2.t)));
     }
 
     @Override

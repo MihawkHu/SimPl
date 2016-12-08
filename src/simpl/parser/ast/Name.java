@@ -9,6 +9,7 @@ import simpl.typing.Type;
 import simpl.typing.TypeEnv;
 import simpl.typing.TypeError;
 import simpl.typing.TypeResult;
+import simpl.typing.Substitution;
 
 public class Name extends Expr {
 
@@ -24,8 +25,11 @@ public class Name extends Expr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        // TODO Done
+        if (E.get(x) == null){
+            throw new TypeError("Name not found");
+        }
+        return TypeResult.of(E.get(x));
     }
 
     @Override

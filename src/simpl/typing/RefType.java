@@ -11,7 +11,7 @@ public final class RefType extends Type {
     @Override
     public boolean isEqualityType() {
         // TODO Done
-        // "t ref" is Equality type directly
+        // "t ref" is equality type directly
         return true;
     }
 

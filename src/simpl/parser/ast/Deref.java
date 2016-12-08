@@ -24,8 +24,14 @@ public class Deref extends UnaryExpr {
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
-        // TODO
-        return null;
+        // TODO Done
+        TypeResult tr1 = e.typecheck(E);
+        TypeVar tv1 = new TypeVar(true);
+        RefType t1 = new RefType(tv1);
+
+        Substitution sub1 = tr1.s.compose(tr1.t.unify(t1));
+
+        return TypeResult.of(sub1, sub1.apply(t1.t));
     }
 
     @Override
