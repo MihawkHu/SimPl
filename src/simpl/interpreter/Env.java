@@ -4,9 +4,9 @@ import simpl.parser.Symbol;
 
 public class Env {
 
-    private final Env E;
-    private final Symbol x;
-    private final Value v;
+    public final Env E;
+    public final Symbol x;
+    public final Value v;
 
     private Env() {
         E = null;
