@@ -18,12 +18,11 @@ public abstract class ArithExpr extends BinaryExpr {
         TypeResult tr1 = l.typecheck(E);
         TypeResult tr2 = r.typecheck(E);
 
-        Substitution sub1 = tr2.s.compose(tr1.s);
-        Substitution sub2 = sub1.apply(tr1.t).unify(Type.INT);
-        sub1 = sub1.compose(sub2);
-        Substitution sub3 = sub1.apply(tr2.t).unify(Type.INT);
-        sub1 = sub1.compose(sub3);
+        Substitution sub1=tr1.s.compose(tr1.t.unify(Type.INT));
+        Substitution sub2=tr2.s.compose(tr2.t.unify(Type.INT));
+        Substitution sub3=sub1.compose(sub2);
         Type t1 = Type.INT;
-        return TypeResult.of(sub1, t1);
+
+        return TypeResult.of(sub3, t1);
     }
 }

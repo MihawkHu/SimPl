@@ -22,25 +22,20 @@ public class TypeVar extends Type {
     @Override
     public Substitution unify(Type t) throws TypeCircularityError {
         // TODO Done
-        if (t instanceof TypeVar) {
-            if (t.contains(this)){
-                if (((TypeVar)t).name.equals(this.name)) {
-                    return Substitution.IDENTITY;
-                }
-                else { // stuck happened a = s (s contains a)
-                    throw new TypeCircularityError();
-                }
-            }
-            else if (!this.isEqualityType()) {
-                return Substitution.of((TypeVar)t, this);
-            }
-        }
-        if (t.contains(this)) {
+        if (!(t instanceof TypeVar) && (t.contains(this))) {
             throw new TypeCircularityError();
+        } // stuck happened
+
+        Substitution sub1 = Substitution.of(this, t);
+        try {
+            Type t1 = TypeEnv.sub.apply(this);
+            if (t1 != this) {
+                Substitution s2 = t1.unify(t);
+                return sub1.compose(s2);
+            }
         }
-        else {
-            return Substitution.of(this, t);
-        }
+        catch (Exception e) {}
+        return sub1;
     }
 
     public String toString() {

@@ -5,6 +5,7 @@ import simpl.parser.Symbol;
 public abstract class TypeEnv {
 
     public abstract Type get(Symbol x);
+    public static Substitution sub = Substitution.IDENTITY;
 
     public static TypeEnv of(final TypeEnv E, final Symbol x, final Type t) {
         return new TypeEnv() {
@@ -17,6 +18,10 @@ public abstract class TypeEnv {
                 return x + ":" + t + ";" + E;
             }
         };
+    }
+
+    public static void compose(final Substitution s) {
+        sub = sub.compose(s);
     }
 
     public static final TypeEnv empty = new TypeEnv() {

@@ -32,11 +32,13 @@ public class Rec extends Expr {
         // TODO Done
         TypeVar tv1 = new TypeVar(false);
         E = TypeEnv.of(E, x, tv1);
+
         TypeResult tr1 = e.typecheck(E);
+        Substitution sub1 = tv1.unify(tr1.t);
+        TypeEnv.compose(sub1);
 
-        Substitution sub1 = tr1.s.compose(tr1.t.unify(tv1));
-
-        return TypeResult.of(tr1.s, sub1.apply(tr1.t));
+        return TypeResult.of(tr1.s.compose(sub1),
+                TypeEnv.sub.apply(tr1.t));
 
     }
 

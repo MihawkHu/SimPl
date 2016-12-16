@@ -1,5 +1,7 @@
 package simpl.typing;
 
+import simpl.parser.ast.Sub;
+
 public final class ArrowType extends Type {
 
     public Type t1, t2;
@@ -22,10 +24,9 @@ public final class ArrowType extends Type {
             return t.unify(this);
         }
         else if (t instanceof ArrowType) {
-            Substitution s1 = ((ArrowType)t).t2.unify(this.t2);
-            Substitution s2 = s1.apply(((ArrowType)t).t1).unify(s1.apply(this.t1));
+            ArrowType ta1 = (ArrowType)t;
 
-            return s2.compose(s1);
+            return t1.unify(ta1.t1).compose(t2.unify(ta1.t2));
         }
         else {
             throw new TypeMismatchError();

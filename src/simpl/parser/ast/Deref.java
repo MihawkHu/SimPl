@@ -27,12 +27,17 @@ public class Deref extends UnaryExpr {
         // TODO Done
         TypeResult tr1 = e.typecheck(E);
 
-        TypeVar tv1 = new TypeVar(true);
-        RefType t1 = new RefType(tv1);
+        if (tr1.t instanceof RefType) { // tr1 is reference type
+            return TypeResult.of(tr1.s,((RefType)tr1.t).t);
+        }
+        else if (tr1.t instanceof TypeVar) { // tr1 is a type variable
+            TypeVar tv1 = new TypeVar(false);
+            RefType t1 = new RefType(tv1);
+            Substitution s=tr1.s.compose(tr1.t.unify(t1));
+            return TypeResult.of(s, tv1);
+        }
 
-        Substitution sub1 = tr1.s.compose(tr1.t.unify(t1));
-
-        return TypeResult.of(sub1, sub1.apply(t1.t));
+        throw new TypeError("Ref type error");
     }
 
     @Override

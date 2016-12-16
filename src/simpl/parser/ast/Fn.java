@@ -29,11 +29,13 @@ public class Fn extends Expr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
-        TypeVar tv1 = new TypeVar(true);
-        TypeResult tr1 = e.typecheck(TypeEnv.of(E, x, tv1));
-        Type t1 = new ArrowType(tr1.s.apply(tv1), tr1.t);
+        TypeVar tv1 = new TypeVar(false);
+        E = TypeEnv.of(E, x, tv1);
 
-        return TypeResult.of(tr1.s, t1);
+        TypeResult tr1 = e.typecheck(E);
+        ArrowType ta1 = new ArrowType(TypeEnv.sub.apply(tv1), tr1.t);
+
+        return TypeResult.of(tr1.s, ta1);
     }
 
     @Override

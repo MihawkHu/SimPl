@@ -22,9 +22,9 @@ public final class PairType extends Type {
             return t.unify(this);
         }
         else if (t instanceof PairType) {
-            Substitution s1 = t1.unify(((PairType)t).t1);
-            Substitution s2 = t2.unify(((PairType)t).t2);
-            return s2.compose(s1);
+            PairType tp1 = (PairType)t;
+
+            return t1.unify(tp1.t1).compose(t2.unify(tp1.t2));
         }
         else {
             throw new TypeMismatchError();

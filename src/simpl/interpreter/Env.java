@@ -36,12 +36,20 @@ public class Env {
             return v;
         }
         else {
-            return E.get(y);
+            if (this.E == null) {
+                return null;
+            }
+            else {
+                return E.get(y);
+            }
         }
     }
 
     public Env clone() {
         // TODO Done
-        return new Env(E, x, v);
+        if (this == null) {
+            return null;
+        }
+        return new Env(this.E.clone(),this.x,this.v);
     }
 }

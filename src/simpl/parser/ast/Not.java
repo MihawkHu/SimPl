@@ -27,7 +27,7 @@ public class Not extends UnaryExpr {
 
         Substitution sub1 = tr1.t.unify(Type.BOOL);
 
-        return TypeResult.of(sub1, Type.BOOL);
+        return TypeResult.of(tr1.s.compose(sub1), Type.BOOL);
     }
 
     @Override

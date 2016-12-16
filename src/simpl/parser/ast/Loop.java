@@ -27,12 +27,12 @@ public class Loop extends Expr {
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO Done
         TypeResult tr1 = e1.typecheck(E);
-        TypeResult tr2 = e2.typecheck(E);
+        TypeResult t2 = e2.typecheck(E);
 
         Substitution sub1 = tr1.t.unify(Type.BOOL);
-        Substitution sub2 = tr1.s.compose(tr2.s.compose(sub1));
+        Substitution sub2 = t2.s.compose(sub1);
 
-        return TypeResult.of(sub2, Type.UNIT);
+        return TypeResult.of(tr1.s.compose(sub2), Type.UNIT);
     }
 
     @Override

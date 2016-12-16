@@ -31,14 +31,13 @@ public class Cond extends Expr {
         TypeResult tr2 = e2.typecheck(E);
         TypeResult tr3 = e3.typecheck(E);
 
-        Substitution sub1 = tr3.s.compose(tr2.s.compose(tr1.s));
-        Substitution sub2 = sub1.apply(tr1.t).unify(Type.BOOL);
-        sub1 = sub1.compose(sub2);
-        Substitution sub3 = sub1.apply(tr2.t).unify(sub1.apply(tr3.t));
-        sub1 = sub1.compose(sub3);
-        Type t1 = sub1.apply(tr3.t);
+        Substitution s1=tr1.t.unify(Type.BOOL);
+        Substitution s2=tr2.t.unify(tr3.t);
+        TypeEnv.compose(s2);
+        Substitution sub3 = tr3.s.compose(s1.compose(s2));
 
-        return TypeResult.of(sub1, t1);
+        return TypeResult.of(tr1.s.compose(tr2.s.compose(sub3)),
+                s2.apply(tr2.t));
     }
 
     @Override

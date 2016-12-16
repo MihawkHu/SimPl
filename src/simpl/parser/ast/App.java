@@ -33,15 +33,21 @@ public class App extends BinaryExpr {
         // TODO Done
         TypeResult tr1 = l.typecheck(E);
         TypeResult tr2 = r.typecheck(E);
-        ArrowType t3 = new ArrowType(new TypeVar(true), new TypeVar(true));
 
-        Substitution sub1 = tr2.s.compose(tr1.s);
-        Substitution sub2 = sub1.apply(tr1.t).unify(sub1.apply(t3));
-        sub1 = sub1.compose(sub2);
-        Substitution sub3 = sub1.apply(tr2.t).unify(sub1.apply(t3.t1));
-        sub1 = sub1.compose(sub3);
+        if (tr1.t instanceof ArrowType) { // l is a function
+            Substitution sub1 = ((ArrowType)tr1.t).t1.unify(tr2.t);
+            TypeEnv.compose(sub1);
+            return TypeResult.of(tr1.s.compose(tr2.s.compose(sub1)),
+                    ((ArrowType)sub1.apply(tr1.t)).t2);
+        }
+        else if (tr1.t instanceof TypeVar) { // l is a type variable
+            Substitution sub2 = tr1.t.unify(new ArrowType(tr2.t,new TypeVar(false)));
+            TypeEnv.compose(sub2);
+            return TypeResult.of(tr1.s.compose(tr2.s.compose(sub2)),
+                    TypeEnv.sub.apply(((ArrowType)sub2.apply(tr1.t)).t2));
+        }
 
-        return TypeResult.of(sub1, sub1.apply(t3.t2));
+        throw new TypeError("App type wrong");
     }
 
     @Override

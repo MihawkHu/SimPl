@@ -27,7 +27,7 @@ public class Neg extends UnaryExpr {
 
         Substitution sub1 = tr1.t.unify(Type.INT);
 
-        return TypeResult.of(sub1, Type.INT);
+        return TypeResult.of(tr1.s.compose(sub1), Type.INT);
     }
 
     @Override
