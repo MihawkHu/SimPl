@@ -44,4 +44,12 @@ public final class RefType extends Type {
     public String toString() {
         return t + " ref";
     }
+
+    @Override
+    public boolean equals(Type t) {
+        if (t instanceof RefType) {
+            return this.t.equals(((RefType)t).t);
+        }
+        return false;
+    }
 }

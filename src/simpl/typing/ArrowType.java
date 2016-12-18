@@ -50,4 +50,13 @@ public final class ArrowType extends Type {
     public String toString() {
         return "(" + t1 + " -> " + t2 + ")";
     }
+
+    @Override
+    public boolean equals(Type t) {
+        if (t instanceof ArrowType) {
+            ArrowType ta1 = (ArrowType)t;
+            return t1.equals(ta1.t1) && t2.equals(ta1.t2);
+        }
+        return false;
+    }
 }

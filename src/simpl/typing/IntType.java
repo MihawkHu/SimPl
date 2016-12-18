@@ -40,4 +40,12 @@ final class IntType extends Type {
     public String toString() {
         return "int";
     }
+
+    @Override
+    public boolean equals(Type t) {
+        if (t instanceof IntType) {
+            return true;
+        }
+        return false;
+    }
 }

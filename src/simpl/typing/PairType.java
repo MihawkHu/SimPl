@@ -48,4 +48,12 @@ public final class PairType extends Type {
     public String toString() {
         return "(" + t1 + " * " + t2 + ")";
     }
+
+    public boolean equals(Type t) {
+        if (t instanceof PairType) {
+            PairType tp1 = (PairType)t;
+            return t1.equals(tp1.t1) && t2.equals(tp1.t2);
+        }
+        return false;
+    }
 }

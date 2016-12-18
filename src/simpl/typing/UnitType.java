@@ -34,4 +34,12 @@ final class UnitType extends Type {
     public String toString() {
         return "unit";
     }
+
+    @Override
+    public boolean equals(Type t) {
+        if (t instanceof UnitType) {
+            return true;
+        }
+        return false;
+    }
 }

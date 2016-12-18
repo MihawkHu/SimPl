@@ -10,8 +10,18 @@ public abstract class TypeEnv {
     public static TypeEnv of(final TypeEnv E, final Symbol x, final Type t) {
         return new TypeEnv() {
             public Type get(Symbol x1) {
-                if (x == x1) return t;
-                return E.get(x1);
+                if (x == x1) {
+                    if (sub.apply(t) == null) {
+                        return t;
+                    }
+                    Type t1 = sub.apply(t);
+                    while (!t1.equals(t1)) {
+                        t1 = sub.apply(t1);
+                    }
+                    return t1;
+                }
+                else
+                    return E.get(x1);
             }
 
             public String toString() {

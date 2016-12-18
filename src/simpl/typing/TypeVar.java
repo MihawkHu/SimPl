@@ -58,4 +58,12 @@ public class TypeVar extends Type {
             return this;
         }
     }
+
+    @Override
+    public boolean equals(Type t) {
+        if (t instanceof TypeVar) {
+            return this.name.equals(((TypeVar) t).name);
+        }
+        return false;
+    }
 }

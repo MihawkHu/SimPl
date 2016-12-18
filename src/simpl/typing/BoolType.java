@@ -40,4 +40,12 @@ final class BoolType extends Type {
     public String toString() {
         return "bool";
     }
+
+    @Override
+    public boolean equals(Type t) {
+        if (t instanceof BoolType) {
+            return true;
+        }
+        return true;
+    }
 }
