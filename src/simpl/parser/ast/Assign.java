@@ -44,6 +44,7 @@ public class Assign extends BinaryExpr {
         RefValue r1 = (RefValue)l.eval(s);
         Value v = r.eval(s);
         s.M.put(r1.p, v);
+
         return Value.UNIT;
     }
 }

@@ -35,6 +35,7 @@ public class Seq extends BinaryExpr {
         // TODO Done
         Value v1 = l.eval(s);
         Value v2 = r.eval(s);
+
         return v2;
     }
 }
