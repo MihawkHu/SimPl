@@ -2,6 +2,10 @@ package simpl.interpreter;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 
 import simpl.parser.Parser;
 import simpl.parser.SyntaxError;
@@ -40,20 +44,43 @@ public class Interpreter {
     }
 
     public static void main(String[] args) {
-        interpret("doc/examples/plus.spl");
-        interpret("doc/examples/factorial.spl");
-        interpret("doc/examples/gcd1.spl");
-        interpret("doc/examples/gcd2.spl");
-        interpret("doc/examples/max.spl");
-        interpret("doc/examples/sum.spl");
-        interpret("doc/examples/map.spl");
-        interpret("doc/examples/pcf.sum.spl");
-        interpret("doc/examples/pcf.even.spl");
-        interpret("doc/examples/pcf.minus.spl");
-        interpret("doc/examples/pcf.factorial.spl");
+        try {
+            File f = new File("System.out");
+            if (!f.exists()) {
+                try {
+                    f.createNewFile();
+                }
+                catch (IOException e) {}
+            }
+            PrintStream out = new PrintStream(new FileOutputStream(f));
+            System.setOut(out);
+            System.setErr(out);
+        }
+        catch (Exception e) {
+            System.out.println("File open error");
+            return;
+        }
+        try {
+            interpret(args[0]);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+//        interpret("doc/examples/plus.spl");
+//        interpret("doc/examples/factorial.spl");
+//        interpret("doc/examples/gcd1.spl");
+//        interpret("doc/examples/gcd2.spl");
+//        interpret("doc/examples/max.spl");
+//        interpret("doc/examples/sum.spl");
+//        interpret("doc/examples/map.spl");
+//        interpret("doc/examples/pcf.sum.spl");
+//        interpret("doc/examples/pcf.even.spl");
+//        interpret("doc/examples/pcf.minus.spl");
+//        interpret("doc/examples/pcf.factorial.spl");
 //        interpret("doc/examples/pcf.fibonacci.spl");
-        interpret("doc/examples/pcf.twice.spl");
-        interpret("doc/examples/pcf.lists.spl");
-        interpret("doc/examples/true.spl");
+//        interpret("doc/examples/pcf.twice.spl");
+//        interpret("doc/examples/pcf.lists.spl");
+//        interpret("doc/examples/true.spl");
     }
 }
