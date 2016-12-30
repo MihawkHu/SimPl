@@ -12,4 +12,10 @@
 hs_err_pid*
 
 .idea/*
-.setting/*
+.settings/*
+
+*.iml
+*.project
+*.classpath
+bin/*
+*.DS_Store
